@@ -2,7 +2,6 @@ package hk.com.quantum.paypal;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.security.Security;
 import java.util.Map;
 
@@ -52,7 +51,7 @@ public class ButtonEncryptor {
 	 *      "https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_html_Appx_websitestandard_htmlvariables"
 	 *      >PayPal Technical HTML Variables</a>
 	 */
-	public String encryptButton(Map<String, String> buttonInfoMap) {
+	public String encryptButtonValue(Map<String, String> buttonInfoMap) {
 
 		if (prvkey == null || prvkey.length == 0)
 			throw new IllegalArgumentException("Cannot read private key");
@@ -112,55 +111,5 @@ public class ButtonEncryptor {
 		}
 		writer.flush();
 		return pemStream.toByteArray();
-	}
-
-	/**
-	 * Paypal Environments
-	 * @author lsiu
-	 *
-	 */
-	public enum ENV {
-		LIVE, SANDBOX
-	}
-
-	/**
-	 * Create a HTML <code>Form</code> tag with the encrypted button information
-	 * provided
-	 * 
-	 * @param buttonInfoMap
-	 *            Button information as described in PayPal reference link
-	 *            below.
-	 * @param env
-	 *            PayPal environment which this PayPal form button will post
-	 *            against
-	 * @return
-	 * 
-	 * @See <a href=
-	 *      "https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_html_Appx_websitestandard_htmlvariables"
-	 *      >PayPal Technical HTML Variables</a>
-	 */
-	public String createForm(Map<String, String> buttonInfoMap, ENV env) {
-
-		String encryptedValue = encryptButton(buttonInfoMap);
-
-		String stage = "";
-		if (env == ENV.SANDBOX)
-			stage = "sandbox.";
-
-		StringWriter out = new StringWriter();
-		out.write("<form action=\"https://www.");
-		out.write(stage);
-		out.write("paypal.com/cgi-bin/webscr\" method=\"post\">");
-		out.write("<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">");
-
-		out.write("<input type=\"image\" src=\"https://www.");
-		out.write(stage);
-		out.write("paypal.com/en_US/i/btn/x-click-but23.gif\" border=\"0\" name=\"submit\" ");
-		out.write("alt=\"Make payments with PayPal - it's fast, free and secure!\">");
-		out.write("<input type=\"hidden\" name=\"encrypted\" value=\"");
-		out.write(encryptedValue);
-		out.write("\">");
-		out.write("</form>");
-		return out.toString();
 	}
 }

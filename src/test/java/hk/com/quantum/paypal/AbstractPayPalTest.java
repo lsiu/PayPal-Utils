@@ -9,7 +9,7 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-public class AbstractPayPalTest {
+public abstract class AbstractPayPalTest {
 
 	protected byte[] getPrivateKey() throws IOException {
 		return IOUtils.toByteArray(this.getClass().getResourceAsStream(
@@ -63,12 +63,15 @@ public class AbstractPayPalTest {
 			}
 		};
 	}
-	
+
 	private int testCounter = 0;
 
 	protected void writeResult(String result) throws IOException {
-		FileUtils.write(new File("target/" + this.getClass().getSimpleName()
-				+ "_" + (testCounter++) + ".htm"), result);
+		String testCase = this.getClass().getSimpleName() + "_"
+				+ (testCounter++);
+		System.out.println("++++ Test case: " + testCase);
+		System.out.println(result);
+		FileUtils.write(new File("target/" + testCase + ".htm"), result);
 	}
 
 }
