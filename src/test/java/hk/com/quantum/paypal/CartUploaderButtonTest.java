@@ -15,9 +15,12 @@ public class CartUploaderButtonTest extends AbstractPayPalTest {
 		Map<String, String> m = getBaseButtonInfoMap();
 		m.put("amount_1", "40");
 		m.put("item_name_1", "Item 1 Name");
-		m.put("amount_2", "3");
+		m.put("quantity_1", "3");
+		m.put("amount_2", "4");
 		m.put("item_name_2", "Item 2 Name");
-				
-		writeResult(new CartUploaderButton(getButtonEncryptor()).createForm(m, ENV.SANDBOX));
+		m.put("quantity_2", "48");
+
+		writeResult(new CartUploaderButton(getButtonEncryptor()).createForm(m,
+				ENV.SANDBOX));
 	}
 }
