@@ -1,5 +1,7 @@
 package hk.com.quantum.paypal;
 
+import hk.com.quantum.paypal.encrypt.ButtonEncryptor;
+
 import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;

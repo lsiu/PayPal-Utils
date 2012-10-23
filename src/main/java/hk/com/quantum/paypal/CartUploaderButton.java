@@ -1,5 +1,7 @@
 package hk.com.quantum.paypal;
 
+import hk.com.quantum.paypal.encrypt.ButtonEncryptor;
+
 import java.util.Map;
 
 public class CartUploaderButton extends AbstractFormCreator {

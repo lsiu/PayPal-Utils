@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-public class CartUploaderTest extends AbstractPayPalTest {
+public class CartUploaderButtonTest extends AbstractPayPalTest {
 
 	@Test
 	public void testEncrypt() throws IOException {

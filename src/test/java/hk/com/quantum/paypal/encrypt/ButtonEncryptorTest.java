@@ -1,4 +1,6 @@
-package hk.com.quantum.paypal;
+package hk.com.quantum.paypal.encrypt;
+
+import hk.com.quantum.paypal.AbstractPayPalTest;
 
 import java.io.IOException;
 import java.util.Map;

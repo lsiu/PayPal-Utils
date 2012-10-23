@@ -1,4 +1,4 @@
-package hk.com.quantum.paypal;
+package hk.com.quantum.paypal.encrypt;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
